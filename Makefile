@@ -43,19 +43,15 @@ endef
 define Build/Compile
 	$(eval GO_PKG_BUILD_PKG:=github.com/m13253/dns-over-https/doh-client)
 	$(call GoPackage/Build/Compile)
-	# uncomment this line if upx presents
+	# comment this line if upx not present
 	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/doh-client
+	chmod +x ./files/etc/init.d/dns-over-https
 endef
 
 define Package/$(PKG_NAME)/install
 	$(CP) ./files/* $(1)/
 	$(INSTALL_DIR) $(1)/usr/bin
 	$(INSTALL_BIN) $(GO_PKG_BUILD_BIN_DIR)/doh-client $(1)/usr/bin/doh-client
-endef
-
-define Package/$(PKG_NAME)/postinst
-	#!/bin/sh
-	chmod +x /etc/init.d/dns-over-https
 endef
 
 $(eval $(call GoBinPackage,$(PKG_NAME)))
