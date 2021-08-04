@@ -1,13 +1,13 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=dns-over-https
-PKG_VERSION:=2.2.4
+PKG_VERSION:=2.2.5
 PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
-PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL:=https://github.com/m13253/dns-over-https
-PKG_SOURCE_VERSION:=v2.2.4
+PKG_SOURCE_URL:=https://github.com/m13253/dns-over-https/archive/refs/tags/v${PKG_VERSION}.tar.gz
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SHA1SUM=387a2481135a7e131c20967b842d45a2a578893a
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -19,6 +19,7 @@ PKG_USE_MIPS16:=0
 
 GO_PKG:=https://github.com/m13253/dns-over-https
 GO_PKG_LDFLAGS:=-s -w
+GO_PKG_LDFLAGS_X:=main.VERSION=v$(PKG_VERSION)
 # PKG_CONFIG_DEPENDS:= 
 
 include $(INCLUDE_DIR)/package.mk
@@ -41,7 +42,6 @@ define Build/Prepare
 endef
 
 define Build/Compile
-	$(eval GO_PKG_BUILD_PKG:=github.com/m13253/dns-over-https/doh-client)
 	$(call GoPackage/Build/Compile)
 	# comment this line if upx not present
 	$(STAGING_DIR_HOST)/bin/upx --lzma --best $(GO_PKG_BUILD_BIN_DIR)/doh-client
