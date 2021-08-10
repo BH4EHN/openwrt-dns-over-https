@@ -5,9 +5,9 @@ PKG_VERSION:=2.2.5
 PKG_RELEASE:=1
 PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
-PKG_SOURCE_URL:=https://github.com/m13253/dns-over-https/archive/refs/tags/v${PKG_VERSION}.tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/m13253/dns-over-https/tar.gz/v${PKG_VERSION}?
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
-PKG_SHA1SUM=387a2481135a7e131c20967b842d45a2a578893a
+PKG_MD5SUM=724502fac042ddd255ac77c5ee57f722
 
 PKG_LICENSE:=MIT
 PKG_LICENSE_FILES:=LICENSE
@@ -17,7 +17,7 @@ PKG_BUILD_DEPENDS:=golang/host
 PKG_BUILD_PARALLEL:=1
 PKG_USE_MIPS16:=0
 
-GO_PKG:=https://github.com/m13253/dns-over-https
+GO_PKG:=github.com/m13253/dns-over-https
 GO_PKG_LDFLAGS:=-s -w
 GO_PKG_LDFLAGS_X:=main.VERSION=v$(PKG_VERSION)
 # PKG_CONFIG_DEPENDS:= 
